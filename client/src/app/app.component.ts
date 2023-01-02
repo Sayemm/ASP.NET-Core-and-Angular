@@ -11,7 +11,7 @@ export class AppComponent implements OnInit{
   users: any;
 
   constructor(
-    private httpService: HttpClient
+    private http: HttpClient
   ) {
   }
 
@@ -20,14 +20,14 @@ export class AppComponent implements OnInit{
   }
 
   getUsers() {
-    this.httpService.get('https://localhost:7211/api/users')
-    .subscribe({
-      next: (result) => {
-        this.users = result;
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    })
+    this.http.get('https://localhost:7211/api/users')
+      .subscribe({
+        next: (result) => {
+          this.users = result;
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      })
   }
 }
