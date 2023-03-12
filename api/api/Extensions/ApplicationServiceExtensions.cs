@@ -1,4 +1,5 @@
 ﻿using api.Data;
+using api.Helpers;
 using api.Interfaces;
 using api.Services;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ namespace api.Extensions
     {
       services.AddScoped<ITokenService, TokenService>();
       services.AddScoped<IUserRepository, UserRepository>();
+      services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
       services.AddDbContext<DataContext>(options =>
       {
         options.UseSqlServer(config.GetConnectionString("DefaultConnection"));
