@@ -5,3 +5,11 @@
 .dropdown-toggle {
   text-decoration: none;
 }
+
+img {
+  max-height: 35px;
+  border: 2px solid #fff;
+  display: inline;
+  margin-right: 4px;
+  border-radius: 20px;
+}
