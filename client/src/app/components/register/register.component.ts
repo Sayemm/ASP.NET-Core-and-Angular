@@ -18,6 +18,9 @@ export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
   model: any = {};
   registerForm: FormGroup;
+  usernameControl: FormControl;
+  passwordControl: FormControl;
+  confirmPasswordControl: FormControl;
 
   constructor(
     private accountService: AccountService,
@@ -29,17 +32,21 @@ export class RegisterComponent implements OnInit {
   }
 
   initializeForm() {
+    this.usernameControl = new FormControl('', Validators.required);
+    this.passwordControl = new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+      Validators.maxLength(8),
+    ]);
+    this.confirmPasswordControl = new FormControl('', [
+      Validators.required,
+      this.matchValues('password'),
+    ]);
+
     this.registerForm = new FormGroup({
-      username: new FormControl('', Validators.required),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(8),
-      ]),
-      confirmPassword: new FormControl('', [
-        Validators.required,
-        this.matchValues('password'),
-      ]),
+      username: this.usernameControl,
+      password: this.passwordControl,
+      confirmPassword: this.confirmPasswordControl,
     });
   }
 
