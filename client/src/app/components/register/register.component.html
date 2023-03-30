@@ -26,25 +26,19 @@
   <app-text-input
     [formControl]="knowsAsControl"
     [label]="'Known As'"
-    [type]="'knownAs'"
   ></app-text-input>
 
-  <app-text-input
+  <app-date-input
     [formControl]="dateOfBirthControl"
     [label]="'Date Of Birth'"
-    [type]="'dateOfBirth'"
-  ></app-text-input>
+    [maxDate]="maxDate"
+  ></app-date-input>
 
-  <app-text-input
-    [formControl]="cityControl"
-    [label]="'City'"
-    [type]="'city'"
-  ></app-text-input>
+  <app-text-input [formControl]="cityControl" [label]="'City'"></app-text-input>
 
   <app-text-input
     [formControl]="countryControl"
     [label]="'Country'"
-    [type]="'country'"
   ></app-text-input>
 
   <app-text-input
