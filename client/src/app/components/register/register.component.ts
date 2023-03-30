@@ -21,6 +21,11 @@ export class RegisterComponent implements OnInit {
   usernameControl: FormControl;
   passwordControl: FormControl;
   confirmPasswordControl: FormControl;
+  genderControl: FormControl;
+  knowsAsControl: FormControl;
+  dateOfBirthControl: FormControl;
+  cityControl: FormControl;
+  countryControl: FormControl;
 
   constructor(
     private accountService: AccountService,
@@ -42,11 +47,21 @@ export class RegisterComponent implements OnInit {
       Validators.required,
       this.matchValues('password'),
     ]);
+    this.genderControl = new FormControl('male');
+    this.knowsAsControl = new FormControl('', Validators.required);
+    this.dateOfBirthControl = new FormControl('', Validators.required);
+    this.cityControl = new FormControl('', Validators.required);
+    this.countryControl = new FormControl('', Validators.required);
 
     this.registerForm = new FormGroup({
       username: this.usernameControl,
       password: this.passwordControl,
       confirmPassword: this.confirmPasswordControl,
+      gender: this.genderControl,
+      knownAs: this.knowsAsControl,
+      dateOfBirth: this.dateOfBirthControl,
+      city: this.cityControl,
+      country: this.countryControl,
     });
   }
 
