@@ -6,6 +6,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from 'src/app/_services/account.service';
 
@@ -16,7 +17,6 @@ import { AccountService } from 'src/app/_services/account.service';
 })
 export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
-  model: any = {};
   registerForm: FormGroup;
   usernameControl: FormControl;
   passwordControl: FormControl;
@@ -27,10 +27,12 @@ export class RegisterComponent implements OnInit {
   cityControl: FormControl;
   countryControl: FormControl;
   maxDate: Date;
+  validationErrors: string[] = [];
 
   constructor(
     private accountService: AccountService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -77,17 +79,15 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    console.log(this.registerForm.value);
-    // this.accountService.register(this.model).subscribe({
-    //   next: (response) => {
-    //     console.log(response);
-    //     this.cancel();
-    //   },
-    //   error: (er) => {
-    //     console.log(er);
-    //     this.toastr.error(er.error);
-    //   },
-    // });
+    this.accountService.register(this.registerForm.value).subscribe({
+      next: (response) => {
+        this.router.navigateByUrl('/members');
+        this.cancel();
+      },
+      error: (er) => {
+        this.validationErrors = er;
+      },
+    });
   }
 
   cancel() {
